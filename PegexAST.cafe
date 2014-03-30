@@ -1,0 +1,63 @@
+require Pegex::Tree
+
+class Pegex::Pegex::AST, Pegex::Tree
+  atoms: Pegex::Grammar::Atoms().atoms
+  extra_rules: {}
+  prefixes:
+    '!': ['+asr', -1]
+    '=': ['+asr', 1]
+    '.': '-skip'
+    '-': '-pass'
+    '+': '-wrap'
+
+  got-grammar: (got)->
+    meta_section, rule_section = got
+    grammar =
+      '+toprule': @toprule
+    grammar += @extra_rules + meta_section
+    for rule_section (rule)->
+      {key: value} = rule
+      grammar[key] = value
+    grammar
+
+  got-meta-section: (got)->
+    meta = {}
+    for got (next)->
+      [key, val] = next
+      key = "+$key"
+      old = meta[key]
+      if old?
+        if old.type == Array
+          old.push val
+        else
+          meta[key] = [old, val]
+      else
+        meta[key] = $val
+    meta
+
+  got_rule_definition: (got)->
+    [name, value] = got
+    name.gsub! /-/, '_'
+    @toprule = name if name == 'TOP'
+    @toprule ||= name
+    name: value
+
+  got_bracketed_group: (got)->
+    [prefix, group, suffix] = got
+    if prefix?
+      group[@prefixes[prefix]] = 1
+    if $suffix?
+      @set_quantity group, suffix
+    group
+
+  got_all_group: (got)->
+    list = @get_group got
+    fail unless list > 0
+    list.0 if list == 1
+    '.all': list
+
+  got_any_group: (got)->
+    list = @get_group got
+    fail unless list > 0
+    list.0 if list == 1
+    '.any': list
