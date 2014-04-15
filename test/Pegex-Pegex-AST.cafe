@@ -1,5 +1,15 @@
+###
+QQQ:
+- Will require need to be in a scope? What is the scope of require?
+###
 require Pegex::Tree
 
+###
+QQQ:
+- Do we want keywords like 'class' and 'require'. Are they just functions
+  inherited from a Module class that is always loaded? Could they be Unicode
+  symbols?
+###
 class Pegex::Pegex::AST, Pegex::Tree
   atoms: Pegex::Grammar::Atoms().atoms
   extra_rules: {}
@@ -61,3 +71,17 @@ class Pegex::Pegex::AST, Pegex::Tree
     fail unless list > 0
     list.0 if list == 1
     '.any': list
+
+  get_group (group)->
+    get = (it)->
+      it.is_scalar && return
+      if it.is_hash
+        return it
+      else if it.is_array
+        ireturn it.map get _
+      else
+        fail
+    [ get(group) ]
+}
+
+# vim: sw=2:

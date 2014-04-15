@@ -1,0 +1,31 @@
+%grammar cafescript
+
+library: (
+  | comment-line
+  | require-statement
+  | class-definition
+)
+
+comment: / '#' ANY* EOL /
+blank-line: / WS* EOL /
+comment-line: / (: comment | blank-line ) /
+
+class-definition:
+  class-start
+  indent
+  name-value-pair*
+  undent
+
+name-value-pair:
+  name
+  /- ':' +/
+  value
+
+value:
+  class-name
+  string-literal
+  number-literal
+  hash-definition
+  function-definition
+
+# vim: sw=2 lisp:
