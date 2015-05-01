@@ -1,0 +1,17 @@
+== Classes
+
+A class is the definition of a type. Instance objects of a type can be made
+from that type's class.
+
+Some basic classes: Str, Num, Bool
+
+== Syntax
+cafe:       \
+coffee:     ()->
+
+a = \(x, y) x + y
+
+a = \!(x, y)
+  x + y
+
+

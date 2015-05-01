@@ -1,0 +1,62 @@
+
+
+
+
+1:100\>-Fizz*-//3+-Buzz*-//5|-
+
+
+(1:100).for \
+  say ('Fizz' * (- // 3)) + (-Buzz * (- // 5)) | -
+
+
+
+
+
+
+
+
+
+
+
+
+for i in range 1,101:print'Fizz'*(not i%3)+'Buzz'*(not i%5)or i
+
+
+
+
+
+
+
+
+1:100.for{say{(%3)&s+=-Fizz;(%5)&s+=-Buzz;s|-}
+
+1:100.for{say{(%3)&s+='Fizz';(%5)&s+='Buzz';s|-}
+
+1:100.for \
+  say \
+    -Fizz * (% 3) + -Buzz * (% 5) | _
+
+say -Fizz*-%3+-Buzz*-%5|- for 1:100
+
+>-Fizz*-%3+-Buzz*-%5|-
+1:100{>-Fizz*-%%3+-Buzz*-%%5|-}
+
+
+
+say "Fizz"x$_%%3~"Buzz"x$_%%5||$_ for 1..100
+
+
+
+say -Fizz*-%%3~"Buzz"x$_%%5||$_ for 1..100
+
+print+(Fizz)[$_%3].(Buzz)[$_%5]||$_,$/for 1..1e2
+
+[1 to 100]map ->[k+\zz for k,v of{Fi:3,Bu:5}|it%v<1]*''||it
+
+(1:100).for { say (-Fizz * (_ %% 3)) + (-Buzz * (_ %% 5)) | _ }
+
+expr for range
+range.for{expr}
+
+
+

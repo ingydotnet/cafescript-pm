@@ -1,0 +1,36 @@
+use Pegex;
+
+my $input = <<'...';
+# Assignment is declaration
+a = 123
+b = a.sqrt
+say "sqrt of $a is $b"
+...
+
+my $grammar = <<'...';
+code: (comment | statement)* -
+
+comment: / HASH ANY* EOL /
+
+statement: assigment | utterance
+
+assigment: symbol op-assign expr end
+
+utterance: kw-say expr end
+
+expr: literal | symbol call-dot symbol
+end: /- (: SEMI | EOL | EOS ) /
+
+symbol: /- ( WORD+) /
+literal: dq-string | sq-string | number
+dq-string: /- DOUBLE ( [^ DOUBLE]*? ) DOUBLE/
+sq-string: /- SINGLE ( [^ SINGLE]*? ) SINGLE/
+number: /- ( DIGIT+ ) /
+
+kw-say: /- 'say'/
+op-assign: /- '='/
+call-dot: /- '.'/
+...
+
+use XXX;
+XXX pegex($grammar)->parse($input);
