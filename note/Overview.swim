@@ -1,0 +1,12 @@
+A block comment is made like this:
+
+  ###
+  Comment
+  goes
+  here.
+  ###
+
+This is stolen from CoffeeScript. CoffeeScript stole the idea of triples from
+Python's `"""`, and made other multiline things from it like `///` for
+multiline regexes and `###` for multiline comments. Markdown also uses triple
+back-ticks for code blocks.
