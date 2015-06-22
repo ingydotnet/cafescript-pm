@@ -1,0 +1,3 @@
+Require Greeter
+
+Greeter().greet 'Tina'

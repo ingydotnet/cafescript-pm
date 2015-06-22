@@ -1,0 +1,4 @@
+Class Greeter
+
+\greet name
+  Say "Hello $name"

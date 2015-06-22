@@ -1,0 +1,6 @@
+# This is the program in Lingy.
+# Lingy has no syntax.
+# It's just an object.
+# So we can write it in YAML.
+--- !lingy-library
+name: main

@@ -1,14 +1,35 @@
 %grammar cafescript
 
-library: (
-  | comment-line
-  | require-statement
-  | class-definition
-)
+module:
+  comment*
+  meta-section?
+  (
+  | comment
+  | code-block
+  )*
+  class-definition*
 
-comment: / '#' ANY* EOL /
-blank-line: / WS* EOL /
-comment-line: / (: comment | blank-line ) /
+meta-section: /TODO/
+
+code-block:
+  | statement-require
+  | method-define
+  | statement-assign
+  | statement-expr
+
+statement-require:
+  'Require' - symbol eos
+
+comment:
+  | comment-line
+  | comment-block
+
+comment-block:
+  / '###' ( ALL*? ) '###' - EOL /
+
+# Hash comment or blank line:
+comment-line:
+  / ( '#' ANY* | WS* ) EOL /
 
 class-definition:
   class-start

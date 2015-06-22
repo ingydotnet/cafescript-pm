@@ -1,0 +1,115 @@
+{
+   "+grammar" : "cafescript",
+   "+toprule" : "module",
+   "class_definition" : {
+      ".all" : [
+         {
+            ".ref" : "class_start"
+         },
+         {
+            ".ref" : "indent"
+         },
+         {
+            "+min" : 0,
+            ".ref" : "name_value_pair"
+         },
+         {
+            ".ref" : "undent"
+         }
+      ]
+   },
+   "code_block" : {
+      ".any" : [
+         {
+            ".ref" : "statement_require"
+         },
+         {
+            ".ref" : "method_define"
+         },
+         {
+            ".ref" : "statement_assign"
+         },
+         {
+            ".ref" : "statement_expr"
+         }
+      ]
+   },
+   "comment" : {
+      ".any" : [
+         {
+            ".ref" : "comment_line"
+         },
+         {
+            ".ref" : "comment_block"
+         }
+      ]
+   },
+   "comment_block" : {
+      ".rgx" : "\\#\\#\\#([\\s\\S]*?)\\#\\#\\#\\s*\\r?\\n"
+   },
+   "comment_line" : {
+      ".rgx" : "(\\#.*|\\s*)\\r?\\n"
+   },
+   "meta_section" : {
+      ".rgx" : "TODO"
+   },
+   "module" : {
+      ".all" : [
+         {
+            "+min" : 0,
+            ".ref" : "comment"
+         },
+         {
+            "+max" : 1,
+            ".ref" : "meta_section"
+         },
+         {
+            "+min" : 0,
+            ".any" : [
+               {
+                  ".ref" : "comment"
+               },
+               {
+                  ".ref" : "code_block"
+               }
+            ]
+         },
+         {
+            "+min" : 0,
+            ".ref" : "class_definition"
+         }
+      ]
+   },
+   "name_value_pair" : {
+      ".all" : [
+         {
+            ".ref" : "name"
+         },
+         {
+            ".rgx" : "\\s*:\\s+"
+         },
+         {
+            ".ref" : "value"
+         }
+      ]
+   },
+   "value" : {
+      ".all" : [
+         {
+            ".ref" : "class_name"
+         },
+         {
+            ".ref" : "string_literal"
+         },
+         {
+            ".ref" : "number_literal"
+         },
+         {
+            ".ref" : "hash_definition"
+         },
+         {
+            ".ref" : "function_definition"
+         }
+      ]
+   }
+}

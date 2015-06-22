@@ -1,0 +1,28 @@
+In CafeScript a file is a module. Generally it defines one or more classes.
+Scope is indentation based or `{;}` based. A class needs no indentation (it
+goes to EOF or next `Class` keyword.
+
+Q: Where do you put the main code?
+A: In a module, code before the first class is executed on Require. So a file
+   with no class would run. Either that or a file with no class is the same as:
+
+  Class Main
+  \main argv
+    …your code here…
+
+Likely the latter since we need to deal with ARGV.
+
+Q: Parens are optional?
+A: They are the same as Ruby or CoffeeScript. http://coffeescript.org/
+
+  foo bar, baz 1 → foo(bar, baz(1))
+
+Q: I meant in the method header. \greet name vs. \main(argv)
+A: I'm thinking of where you would need them:
+
+  array.each \(elem)
+    say elem
+
+That's an anonymous function. I think we want them there.
+
+
